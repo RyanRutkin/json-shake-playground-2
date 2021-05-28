@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jsonshakeplayground2-dev-113600-authRole",
+      "UnauthRoleArn": "arn:aws:iam::343645227276:role/amplify-jsonshakeplayground2-dev-113600-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::343645227276:role/amplify-jsonshakeplayground2-dev-113600-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-jsonshakeplayground2-dev-113600-deployment",
+      "UnauthRoleName": "amplify-jsonshakeplayground2-dev-113600-unauthRole",
+      "StackName": "amplify-jsonshakeplayground2-dev-113600",
+      "StackId": "arn:aws:cloudformation:us-east-1:343645227276:stack/amplify-jsonshakeplayground2-dev-113600/50251a40-af52-11eb-9591-12e13362d287",
+      "AmplifyAppId": "d1k469fqzdqvw4"
+    },
+    "categories": {
+      "auth": {
+        "cognito6e893bf6": {}
+      }
+    }
+  }
+}

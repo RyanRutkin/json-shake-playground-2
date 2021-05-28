@@ -1,0 +1,68 @@
+{
+    "paths": [
+        {
+            "name": "/resources",
+            "lambdaFunction": "JsonShakeRest",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            },
+            "policyResourceName": "/resources"
+        },
+        {
+            "name": "/logic",
+            "lambdaFunction": "JsonShakeLogic",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            },
+            "policyResourceName": "/logic"
+        }
+    ],
+    "resourceName": "JsonShakeRestAPI",
+    "apiName": "JsonShakeRestAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "JsonShakeRest"
+        },
+        {
+            "lambdaFunction": "JsonShakeLogic"
+        }
+    ],
+    "privacy": {
+        "auth": 2,
+        "unauth": 0,
+        "authRoleName": "amplify-jsonshakeplayground2-dev-113600-authRole",
+        "unAuthRoleName": "amplify-jsonshakeplayground2-dev-113600-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "JsonShakeRest",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "JsonShakeLogic",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
