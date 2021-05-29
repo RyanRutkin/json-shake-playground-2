@@ -34,14 +34,14 @@ export class ShakeModuleInstance {
     }
     addModule(shakeModule: ShakeModuleInstance) {
         if (shakeModule.getParent() !== this) {
-            shakeModule.changeParentModule(this);
+            shakeModule.setParent(this);
         } else {
             this._modules.push(shakeModule);
         }
     }
     removeModule(shakeModule: ShakeModuleInstance) {
         if (shakeModule.getParent() === this) {
-            shakeModule.changeParentModule(null);
+            shakeModule.setParent(null);
         } else if (this._modules.indexOf(shakeModule) > -1) {
             this._modules.splice(this._modules.indexOf(shakeModule), 1);
         }
@@ -50,7 +50,7 @@ export class ShakeModuleInstance {
     getParent(): ShakeModuleInstance | null {
         return this._parent;
     }
-    changeParentModule(parent: ShakeModuleInstance | null) {
+    setParent(parent: ShakeModuleInstance | null) {
         const oldParent = this._parent;
         this._parent = parent;
         if (oldParent) {

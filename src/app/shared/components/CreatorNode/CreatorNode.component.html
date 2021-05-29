@@ -1,0 +1,8 @@
+<div class="app-creator-node" (dragstart)="onDragStart($event)" (drag)="onDrag($event)" (drageend)="onDragEnd($event)" (drop)="onDrop($event)" >
+    <div class="app-creator-node-header" >
+        {{ header }}
+    </div>
+    <div class="app-creator-node-body" >
+        <ng-content></ng-content>
+    </div>
+</div>
