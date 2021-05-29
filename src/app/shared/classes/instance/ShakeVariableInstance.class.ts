@@ -2,7 +2,7 @@ import { Subject } from 'rxjs';
 import { ShakeVariableDefinition } from '../../types/ShakeVariableDefinition.type';
 import { ShakeVariableType } from '../../types/ShakeVariableType.type';
 
-export class ShakeVariableInstance<T extends keyof ShakeVariableType> {
+export class ShakeVariableInstance<T extends keyof ShakeVariableType = 'any'> {
     constructor (
         readonly label: string,
         readonly type: T,
@@ -19,9 +19,9 @@ export class ShakeVariableInstance<T extends keyof ShakeVariableType> {
         return this._value;
     }
     setValue(value: ShakeVariableType[T]) {
-        this.beforeChange.next(this._value);
+        this.beforeChange.next(this.getValue());
         this._value = value;
-        this.onChange.next(this._value);
+        this.onChange.next(this.getValue());
     }
 
     readonly beforeChange: Subject<ShakeVariableType[T]> = new Subject();

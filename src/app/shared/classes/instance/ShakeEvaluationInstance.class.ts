@@ -14,15 +14,22 @@ import { ShakeModuleInstance } from './ShakeModuleInstance.class';
 export class ShakeEvaluationInstance {
     constructor (
         public label: string = '',
-        public parent: ShakeModuleInstance
+        private _parent: ShakeModuleInstance
     ) {}
 
     logic: RulesLogic = '';
 
+    getParent(): ShakeModuleInstance {
+        return this._parent;
+    }
+    setParent(p: ShakeModuleInstance) {
+        this._parent = p;
+    }
+
     run(): ValueOf<ShakeVariableType> {
         const vars = getVariableReferencesInLogic(this.logic);
         return apply(this.logic, vars.reduce<IterableObject<ValueOf<ShakeVariableType>>>((acc, cur) => {
-            acc[cur] = this.parent.resolveVariable(cur);
+            acc[cur] = this._parent.resolveVariable(cur);
             return acc;
         }, {}));
     }

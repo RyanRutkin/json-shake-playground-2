@@ -2,7 +2,8 @@ import { IterableObject } from '../../types/IterableObject.type';
 import { ShakeModuleInstanceDefinition } from '../../types/ShakeModuleInstanceDefinition.type';
 import { ShakeVariableDefinition } from '../../types/ShakeVariableDefinition.type';
 import { ShakeVariableType } from '../../types/ShakeVariableType.type';
-import { ShakeModule } from '../base/ShakeModule.class';
+import { ShakeExecutionInstance } from './ShakeExecutionInstance.class';
+import { ShakeTriggerInstance } from './ShakeTriggerInstance.class';
 import { ShakeVariableInstance } from './ShakeVariableInstance.class';
 
 export class ShakeModuleInstance {
@@ -11,12 +12,16 @@ export class ShakeModuleInstance {
         private _parent: ShakeModuleInstance | null = null
     ) {
         if (_parent) {
-            _parent.add
+            _parent.addModule(this);
         }
     }
 
-    private _variables: IterableObject<ShakeVariableInstance<ShakeVariableType>> = {};
-    getVariables(): IterableObject<ShakeVariableInstance<ShakeVariableType>> {
+    onStart: ShakeExecutionInstance | null = null;
+    onDestroy: ShakeExecutionInstance | null = null;
+    triggers: ShakeTriggerInstance[] = [];
+
+    private _variables: IterableObject<ShakeVariableInstance<keyof ShakeVariableType>> = {};
+    getVariables(): IterableObject<ShakeVariableInstance<keyof ShakeVariableType>> {
         return this._variables;
     }
     addVariable(variable: ShakeVariableDefinition) {
@@ -57,40 +62,41 @@ export class ShakeModuleInstance {
         }
     }
 
-    resolveVariable(label: string): ShakeVariableInstance<ShakeVariableType> | undefined {
+    resolveVariable(label: string): ShakeVariableInstance<keyof ShakeVariableType> | undefined {
         if (this._variables.hasOwnProperty(label)) {
             return this._variables[label];
         }
         return undefined;
     }
 
-    onStart: ShakeExecution | null = null;
-    onDestroy: ShakeExecution | null = null;
+    reportStack(): string[] {
+        return [this.label, ...(this._parent ? this._parent.reportStack() : [])];
+    }
 
-    triggers: ShakeTrigger[] = [];
-
-    serializeAsJson(): ShakeModuleDefinition {
+    serializeAsJson(): ShakeModuleInstanceDefinition {
         return {
             label: this.label,
             variables: Object.entries(this._variables).reduce<IterableObject<ShakeVariableDefinition>>((coll, [key, value]) => {
-                coll[key] = value;
+                coll[key] = value.serializeAsJson();
                 return coll;
             }, {}),
+            modules: this._modules.map(mod => mod.serializeAsJson()),
             onStart: this.onStart ? this.onStart.serializeAsJson() : null,
             onDestroy: this.onDestroy ? this.onDestroy.serializeAsJson() : null,
             triggers: this.triggers.map(trigger => trigger.serializeAsJson())
         };
     }
     
-    static deserializeFromJson(def: ShakeModuleDefinition) {
-        const nModule = new ShakeModule(def.label);
+    static deserializeFromJson(def: ShakeModuleInstanceDefinition, mod?: ShakeModuleInstance) {
+        const nModule = new ShakeModuleInstance(def.label, mod);
         Object.entries(def.variables).forEach(([key, value]) => {
             // Adds itself to module
             nModule.addVariable(value);
         });
-        nModule.onStart = def.onStart ? ShakeExecution.deserializeFromJson(def.onStart) : null;
-        nModule.onDestroy = def.onDestroy ? ShakeExecution.deserializeFromJson(def.onDestroy) : null;
-        nModule.triggers = def.triggers.map(trigger => ShakeTrigger.deserializeFromJson(trigger));
+        nModule.onStart = def.onStart ? ShakeExecutionInstance.deserializeFromJson(def.onStart, nModule) : null;
+        nModule.onDestroy = def.onDestroy ? ShakeExecutionInstance.deserializeFromJson(def.onDestroy, nModule) : null;
+        nModule.triggers = def.triggers.map(trigger => ShakeTriggerInstance.deserializeFromJson(trigger, nModule));
+        def.modules.forEach(subMod => ShakeModuleInstance.deserializeFromJson(subMod, nModule));
         return nModule;
     }
 }
