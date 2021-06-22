@@ -5,4 +5,5 @@ export interface ShakeWhileDefinition extends ShakeExecutionSequenceMember {
     type: 'while',
     label: string;
     execution: ShakeExecutionDefinition | null;
+    id: string | null;
 }

@@ -9,4 +9,5 @@ export interface ShakeTriggerDefinition {
     label: string;
     watchedVariables: ShakeTriggerWatchedVariableDefinition[];
     onTrigger: ShakeExecutionDefinition | null;
+    id: string | null;
 }

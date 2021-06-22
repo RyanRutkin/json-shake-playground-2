@@ -2,22 +2,33 @@ import { Subscription } from 'rxjs';
 import { IterableObject } from '../../types/IterableObject.type';
 import { ShakeTriggerDefinition, ShakeTriggerWatchedVariableDefinition } from '../../types/ShakeTriggerDefinition.type';
 import { ShakeExecutionInstance } from './ShakeExecutionInstance.class';
-import { ShakeModuleInstance } from './ShakeModuleInstance.class';
+import { ShakeClosureInstance } from './ShakeClosureInstance.class';
+import { v4 as uuidv4 } from 'uuid';
 
 export class ShakeTriggerInstance {
     constructor (
-        public label: string = '',
-        private _parent: ShakeModuleInstance
-    ) {}
+        def: ShakeTriggerDefinition,
+        private _parent: ShakeClosureInstance
+    ) {
+        this.setWatchedVariables(def.watchedVariables);
+        this.onTrigger = def.onTrigger ? ShakeExecutionInstance.deserializeFromJson(def.onTrigger, _parent) : null;
+        if (!def.id) {
+            this.id = uuidv4();
+        } else {
+            this.id = def.id;
+        }
+    }
 
+    readonly id: string;
+    label: string;
     onTrigger: ShakeExecutionInstance | null = null;
     private _watchedVariables: ShakeTriggerWatchedVariableDefinition[] = [];
     private _subs: IterableObject<Subscription> = {};
 
-    getParent(): ShakeModuleInstance {
+    getParent(): ShakeClosureInstance {
         return this._parent;
     }
-    setParent(p: ShakeModuleInstance) {
+    setParent(p: ShakeClosureInstance) {
         this._parent = p;
     }
 
@@ -71,14 +82,12 @@ export class ShakeTriggerInstance {
         return {
             label: this.label,
             watchedVariables: this.getWatchedVariableLabels(),
-            onTrigger: this.onTrigger ? this.onTrigger.serializeAsJson() : null
+            onTrigger: this.onTrigger ? this.onTrigger.serializeAsJson() : null,
+            id: this.id
         }
     }
 
-    static deserializeFromJson(def: ShakeTriggerDefinition, mod: ShakeModuleInstance): ShakeTriggerInstance {
-        const trigger = new ShakeTriggerInstance(def.label, mod);
-        trigger.setWatchedVariables(def.watchedVariables);
-        trigger.onTrigger = def.onTrigger ? ShakeExecutionInstance.deserializeFromJson(def.onTrigger, mod) : null;
-        return trigger;
+    static deserializeFromJson(def: ShakeTriggerDefinition, closure: ShakeClosureInstance): ShakeTriggerInstance {
+        return new ShakeTriggerInstance(def, closure);
     }
 }

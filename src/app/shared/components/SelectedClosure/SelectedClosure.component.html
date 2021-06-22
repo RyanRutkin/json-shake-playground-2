@@ -1,0 +1,15 @@
+<div class="app-selected-closure" >
+    <div class="app-selected-closure-variables" >
+        <div *ngFor="let variable of variables" class="app-selected-closure-variable" >
+            <app-child-variable [variable]="variable" ></app-child-variable>
+        </div>
+    </div>
+    <div class="app-selected-closure-execution-body" >
+        <div class="app-selected-closure-onstart" >
+            <app-child-execution [execution]="closure.onStart" [lockPosition]="true" ></app-child-execution>
+        </div>
+        <div class="app-selected-closure-ondestroy" >
+            <app-child-execution [execution]="closure.onDestory" [lockPosition]="true" ></app-child-execution>
+        </div>
+    </div>
+</div>

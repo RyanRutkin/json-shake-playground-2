@@ -1,11 +1,7 @@
 import { Component, Input } from "@angular/core";
-
-export interface CreatorNodeConfig {
-    header: string;
-    callback: () => {};
-    x: number;
-    y: number;
-}
+import { ShakeLogicSelectedNode } from '../../services/ShakeLogic.service';
+import { ShakeDisplay } from '../../types/ShakeDisplay.type';
+import { ShakeNodeType } from '../../types/ShakeNodeType.type';
 
 @Component({
     selector: 'app-creator-node',
@@ -14,21 +10,20 @@ export interface CreatorNodeConfig {
 })
 export class CreatorNodeComponent {
     @Input() header: string;
-    @Input() callback: () => void;
-    @Input() x?: number = 0;
-    @Input() y?: number = 0;
-    @Input() children?: CreatorNodeConfig[] = []
-    @Input() removeFromParent: () => {};
+    @Input() position: ShakeDisplay;
+    @Input() onAddNode?: (nodeDef: ShakeLogicSelectedNode) => void; // when dropped into node
+    @Input() onRemoveNode?: (nodeDef: ShakeLogicSelectedNode) => void; // when dragged out of node
+    @Input() onSetPosition: (position: ShakeDisplay) => void;
+    @Input() instance: any;
+    @Input() type: ShakeNodeType;
 
     debuggerStopped: boolean = false;
     dragging: boolean = false;
 
     onDragStart = (evt: any) => {
         evt.datatransfer.setData('config', {
-            header: this.header,
-            callback: this.callback,
-            x: this.x,
-            y: this.y
+            instance: this.instance,
+            type: this.type
         });
         this.dragging = true;
     }
@@ -41,8 +36,10 @@ export class CreatorNodeComponent {
             debugger;
             this.debuggerStopped = true;
         }
-        this.x = evt.localX;
-        this.y = evt.localY;
+        this.onSetPosition({
+            x: evt.localX,
+            y: evt.localY
+        });
     }
 
     onDragEnd = (evt: any) => {
@@ -50,13 +47,13 @@ export class CreatorNodeComponent {
     }
 
     onDrop = (evt: any) => {
-        this.children.push(evt.datatransfer.getData('config'));
-    }
-
-    removeChild = (child: CreatorNodeConfig) => {
-        const idx = this.children.findIndex(c => c === child);
-        if (idx > -1) {
-            this.children.splice(idx, 1);
+        if (this.onAddNode) {
+            const data = evt.datatransfer.getData('config');
+            this.onAddNode({
+                node: data['instance'],
+                type: data['type'] as ShakeNodeType
+            });
         }
     }
+
 }

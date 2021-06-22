@@ -9,20 +9,31 @@ import { ShakeVariableType } from '../../types/ShakeVariableType.type';
 import { apply } from 'json-logic-js';
 import { getVariableReferencesInLogic } from '../../functions/get-variable-references-in-logic.function';
 import { IterableObject } from '../../types/IterableObject.type';
-import { ShakeModuleInstance } from './ShakeModuleInstance.class';
+import { ShakeClosureInstance } from './ShakeClosureInstance.class';
+import { v4 as uuidv4 } from 'uuid';
 
 export class ShakeEvaluationInstance {
     constructor (
-        public label: string = '',
-        private _parent: ShakeModuleInstance
-    ) {}
+        def: ShakeEvaluationDefinition,
+        private _parent: ShakeClosureInstance
+    ) {
+        this.label = def.label;
+        this.logic = def.logic;
+        if (!def.id) {
+            this.id = uuidv4();
+        } else {
+            this.id = def.id;
+        }
+    }
 
+    readonly id: string;
+    label: string;
     logic: RulesLogic = '';
 
-    getParent(): ShakeModuleInstance {
+    getParent(): ShakeClosureInstance {
         return this._parent;
     }
-    setParent(p: ShakeModuleInstance) {
+    setParent(p: ShakeClosureInstance) {
         this._parent = p;
     }
 
@@ -37,13 +48,12 @@ export class ShakeEvaluationInstance {
     serializeAsJson(): ShakeEvaluationDefinition {
         return {
             label: this.label,
-            logic: this.logic
+            logic: this.logic,
+            id: this.id
         }
     }
 
-    static deserializeFromJson(def: ShakeEvaluationDefinition, mod: ShakeModuleInstance): ShakeEvaluationInstance {
-        const evaluation = new ShakeEvaluationInstance(def.label, mod);
-        evaluation.logic = def.logic;
-        return evaluation;
+    static deserializeFromJson(def: ShakeEvaluationDefinition, closure: ShakeClosureInstance): ShakeEvaluationInstance {
+        return new ShakeEvaluationInstance(def, closure);
     }
 }
