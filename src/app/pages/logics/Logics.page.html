@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-title>
+            Logics
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-margin">
+    <ion-grid class="ion-margin">
+        <ion-row>
+            <ion-col>Name</ion-col>
+            <ion-col>Created On</ion-col>
+            <ion-col>Created By</ion-col>
+        </ion-row>
+        <ion-row #logic [ngForOf]="logics" >
+            <ion-col>{{ logic?logic.label || 'N/A' }}</ion-col>
+            <ion-col>{{ logic.createdOn || 'N/A' }}</ion-col>
+            <ion-col>{{ (logic.createdBy | date) || 'N/A' }}</ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-item lines="none">
+        <ion-button color="primary" size="small" slot="end" routerLink="/editor" >
+            Create Logic
+        </ion-button>
+    </ion-item>
+</ion-content>

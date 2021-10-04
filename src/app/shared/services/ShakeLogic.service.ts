@@ -30,6 +30,7 @@ export class ShakeLogicService {
                 y: 0
             };
         }
+        this.setSelectedNode(closure, 'closure');
     }
 
     findNodeById(id: string) {

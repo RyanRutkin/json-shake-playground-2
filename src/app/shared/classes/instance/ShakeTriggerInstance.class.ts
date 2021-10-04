@@ -42,9 +42,9 @@ export class ShakeTriggerInstance {
         }
         this._watchedVariables.push(def);
         if (def.on === 'before') {
-            this._subs[varRef.label] = varRef.beforeChange.subscribe(val => this._run);
+            this._subs[varRef.label] = varRef.beforeChange$.subscribe(val => this._run);
         } else {
-            this._subs[varRef.label] = varRef.onChange.subscribe(val => this._run);
+            this._subs[varRef.label] = varRef.onChange$.subscribe(val => this._run);
         }
     }
     removeWatchedVariable(label: string) {
@@ -64,9 +64,9 @@ export class ShakeTriggerInstance {
                 throw new Error(`Failed to resolve variable "${def.label}" in trigger "${this.label}". \n${([this.label, ...this._parent.reportStack()]).join('\n')}`);
             }
             if (def.on === 'before') {
-                this._subs[def.label] = varRef.beforeChange.subscribe(val => this._run());
+                this._subs[def.label] = varRef.beforeChange$.subscribe(val => this._run());
             } else {
-                this._subs[def.label] = varRef.onChange.subscribe(val => this._run());
+                this._subs[def.label] = varRef.onChange$.subscribe(val => this._run());
             }
         });
     }

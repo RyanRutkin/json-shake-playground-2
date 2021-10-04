@@ -1,0 +1,8 @@
+<div class="App-selected-node" >
+    <div class="App-selected-node-header" >
+        {{ selectedNodeType }}
+    </div>
+    <div class="App-selected-node-body" [ngSwitch]="selectedNodeType" >
+        <app-selected-closure *ngSwitchCase="'closure'" ></app-selected-closure>
+    </div>
+</div>

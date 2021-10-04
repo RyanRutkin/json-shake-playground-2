@@ -8,6 +8,7 @@ See the License for the specific language governing permissions and limitations 
 
 
 
+var logics = [];
 
 var express = require('express')
 var bodyParser = require('body-parser')
@@ -30,42 +31,40 @@ app.use(function(req, res, next) {
  * Example get method *
  **********************/
 
-app.get('/resources', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
+app.get('/logic', function(req, res) {
+  res.statusCode = 200;
+  res.json(logics);
 });
 
-app.get('/resources/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
+app.get('/logic/:id', function(req, res) {
+  const logic = logics.find(l => l.id === req.params.id);
+  if (!logic) {
+    res.statusCode = 404;
+    res.send({ message: `Logic by id ${req.params.id} not found.`});
+  } else {
+    res.statusCode = 200;
+    res.json(logic);
+  }
 });
 
 /****************************
 * Example post method *
 ****************************/
 
-app.post('/resources', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
-});
-
-app.post('/resources/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+app.post('/logic', function(req, res) {
+  logics.push(req.body);
+  res.statusCode = 200;
+  res.send();
 });
 
 /****************************
 * Example put method *
 ****************************/
 
-app.put('/resources', function(req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
-});
-
-app.put('/resources/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
+app.put('/logic', function(req, res) {
+  logics.push(req.body);
+  res.statusCode = 200;
+  res.send();
 });
 
 /****************************

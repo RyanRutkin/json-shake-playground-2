@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-jsonshakeplayground2-dev-113600-deployment",
-          "S3Key": "amplify-builds/JsonShakeLogic-763536565a3571566276-build.zip"
+          "S3Key": "amplify-builds/JsonShakeLogic-4438327a6d7a47736f74-build.zip"
         }
       }
     },

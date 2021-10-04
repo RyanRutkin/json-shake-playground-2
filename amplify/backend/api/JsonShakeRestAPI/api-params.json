@@ -1,19 +1,16 @@
 {
     "paths": [
         {
-            "name": "/resources",
+            "name": "/logic",
             "lambdaFunction": "JsonShakeRest",
             "privacy": {
                 "private": true,
                 "auth": [
-                    "/POST",
                     "/GET",
-                    "/PUT",
-                    "/PATCH",
-                    "/DELETE"
+                    "/PUT"
                 ]
             },
-            "policyResourceName": "/resources"
+            "policyResourceName": "/logic"
         },
         {
             "name": "/logic",
@@ -21,11 +18,8 @@
             "privacy": {
                 "private": true,
                 "auth": [
-                    "/POST",
                     "/GET",
-                    "/PUT",
-                    "/PATCH",
-                    "/DELETE"
+                    "/PUT"
                 ]
             },
             "policyResourceName": "/logic"
