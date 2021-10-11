@@ -13,6 +13,7 @@ export interface ShakeLogicSelectedNode {
 
 @Injectable({ providedIn: 'root' })
 export class ShakeLogicService {
+    displayMode: 'code' | 'chart' = 'code';
     logic: ShakeClosureInstance | undefined;
     display: IterableObject<ShakeDisplay> = {};
     selectedNode$: BehaviorSubject<ShakeLogicSelectedNode | undefined> = new BehaviorSubject(undefined);
@@ -30,6 +31,7 @@ export class ShakeLogicService {
                 y: 0
             };
         }
+        this.logic = closure;
         this.setSelectedNode(closure, 'closure');
     }
 

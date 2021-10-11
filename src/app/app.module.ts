@@ -8,7 +8,7 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +18,7 @@ import { SharedModule } from './shared/shared.module';
     IonicModule.forRoot(), 
     AppRoutingModule,
     AmplifyUIAngularModule,
-    SharedModule
+    PagesModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { ShakeClosureInstance } from '../../classes/instance/ShakeClosureInstance.class';
 import { ShakeLogicService } from '../../services/ShakeLogic.service';
-import { ShakeDisplay } from '../../types/ShakeDisplay.type';
 import { ShakeNodeType } from '../../types/ShakeNodeType.type';
 
 @Component({

@@ -4,12 +4,36 @@
             <app-child-variable [variable]="variable" ></app-child-variable>
         </div>
     </div>
-    <div class="app-selected-closure-execution-body" >
-        <div class="app-selected-closure-onstart" >
-            <app-child-execution [execution]="closure.onStart" [lockPosition]="true" ></app-child-execution>
+    <div class="app-selected-closure-section" >
+        <div class="app-selected-section-header" >Variables</div>
+        <div class="app-selected-section-body" >
+            <ng-container *ngFor="let variable of variables" >
+                <app-child-variable [variable]="variable" ></app-child-variable>
+            </ng-container>
         </div>
-        <div class="app-selected-closure-ondestroy" >
-            <app-child-execution [execution]="closure.onDestory" [lockPosition]="true" ></app-child-execution>
+        <div class="app-selected-section-footer" >
+            <ion-button (click)="createVariable()" >Create variable</ion-button>
+        </div>
+    </div>
+    <div class="app-selected-closure-section" >
+        <div class="app-selected-section-header" >Execution block</div>
+        <div class="app-selected-closure-execution app-selected-closure-onstart" >
+            <div class="app-selected-closure-execution-header" >onStart</div>
+            <div class="app-selected-closure-execution-body" >
+                <app-child-execution *ngIf="closure.onStart" [execution]="closure.onStart" [lockPosition]="true" ></app-child-execution>
+                <div class="app-selected-closure-execution-create" *ngIf="!closure.onStart" >
+                    <ion-button (click)="createExecution('start')" >Create</ion-button>
+                </div>
+            </div>
+        </div>
+        <div class="app-selected-closure-execution app-selected-closure-ondestroy" >
+            <div class="app-selected-closure-execution-header" >onDestroy</div>
+            <div class="app-selected-closure-execution-body" >
+                <app-child-execution *ngIf="closure.onDestroy" [execution]="closure.onDestroy" [lockPosition]="true" ></app-child-execution>
+                <div class="app-selected-closure-execution-create" *ngIf="!closure.onDestroy" >
+                    <ion-button (click)="createExecution('destroy')" >Create</ion-button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

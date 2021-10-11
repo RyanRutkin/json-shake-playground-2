@@ -2,6 +2,8 @@
   <amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
   <div *ngIf="authState === 'signedin' && user" class="App">
       <amplify-sign-out></amplify-sign-out>
-      <ion-router-outlet></ion-router-outlet>
+      <div class="ion-router-outlet-wrapper" >
+          <ion-router-outlet></ion-router-outlet>
+      </div>
   </div>
 </ion-app>

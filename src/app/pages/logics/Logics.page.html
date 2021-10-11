@@ -12,10 +12,10 @@
             <ion-col>Created On</ion-col>
             <ion-col>Created By</ion-col>
         </ion-row>
-        <ion-row #logic [ngForOf]="logics" >
-            <ion-col>{{ logic?logic.label || 'N/A' }}</ion-col>
-            <ion-col>{{ logic.createdOn || 'N/A' }}</ion-col>
-            <ion-col>{{ (logic.createdBy | date) || 'N/A' }}</ion-col>
+        <ion-row *ngFor="let logic of logics" >
+            <ion-col routerLink="['/editor', logic.logic.id ]" >{{ logic.logic.label || 'N/A' }}</ion-col>
+            <ion-col routerLink="['/editor', logic.logic.id ]" >{{ logic.createdOn || 'N/A' }}</ion-col>
+            <ion-col routerLink="['/editor', logic.logic.id ]" >{{ (logic.createdBy | date) || 'N/A' }}</ion-col>
         </ion-row>
     </ion-grid>
     <ion-item lines="none">

@@ -8,7 +8,7 @@ import { ShakeNodeType } from '../../types/ShakeNodeType.type';
     templateUrl: './SelectedNode.component.html',
     styleUrls: ['./SelectedNode.component.css']
 })
-export class SelectedNode implements OnDestroy {
+export class SelectedNodeComponent implements OnDestroy {
     constructor (private _logicService: ShakeLogicService) {
         this._sub = this._logicService.selectedNode$.subscribe(nodeDef => {
             if (!nodeDef) {

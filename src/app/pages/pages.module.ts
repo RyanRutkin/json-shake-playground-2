@@ -5,14 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { PagesRoutingModule } from './page-routing.module';
 import { EditorPage } from './editor/Editor.page';
 import { LogicsPage } from './logics/Logics.page';
+import { SharedModule } from '../shared/shared.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
   imports: [
+    BrowserModule,
     CommonModule,
     FormsModule,
     IonicModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    SharedModule
   ],
   declarations: [EditorPage, LogicsPage]
 })

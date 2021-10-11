@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { ShakeExecutionInstance } from '../../classes/instance/ShakeExecutionInstance.class';
 import { ShakeLogicSelectedNode, ShakeLogicService } from '../../services/ShakeLogic.service';
 import { ShakeDisplay } from '../../types/ShakeDisplay.type';
@@ -8,15 +8,13 @@ import { ShakeDisplay } from '../../types/ShakeDisplay.type';
     templateUrl: './ChildExecution.component.html',
     styleUrls: ['./ChildExecution.component.css']
 })
-export class ChildExecutionComponent implements OnInit {
+export class ChildExecutionComponent implements AfterViewInit {
     @Input() execution: ShakeExecutionInstance;
     @Input() lockPosition?: boolean;
     @ViewChild('canvas') canvas: ElementRef;
     position: ShakeDisplay;
 
-    constructor (private _logicService: ShakeLogicService) { 
-        this.position = this._logicService.display[this.execution.id];
-    }
+    constructor (private _logicService: ShakeLogicService) {}
 
     onAddNode(nodeDef: ShakeLogicSelectedNode) {
         switch (nodeDef.type) {
@@ -46,7 +44,8 @@ export class ChildExecutionComponent implements OnInit {
         this.position = this._logicService.display[this.execution.id];
     }
 
-    ngOnInit() {
+    ngAfterViewInit() {
+        this.position = this._logicService.display[this.execution.id];
         const canv = this.canvas.nativeElement;
         canv.width = canv.parentNode.offsetWidth;
         canv.height = canv.parentNode.offsetHeight;
