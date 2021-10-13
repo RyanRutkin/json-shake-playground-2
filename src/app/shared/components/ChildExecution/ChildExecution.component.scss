@@ -1,0 +1,38 @@
+$bittersweet: #ff6f59ff;
+$dark-slate-gray: #254441ff;
+$old-mauve: #5d2a42ff;
+$british-racing-green: #034732ff;
+$zomp: #43aa8bff;
+$lavender-blush: #ffeaecff;
+$red-crayola: #ef3054ff;
+
+.app-child-execution {
+    padding: 0.2rem;
+    display: inline-block;
+}
+
+.app-child-execution-label {
+    border-radius: 100vh;
+    padding: 0.2rem 0.8rem;
+}
+
+.app-child-execution-label:nth-child(1) {
+    background-color: $bittersweet;
+    color: white;
+}
+.app-child-execution-label:nth-child(2) {
+    background-color: $british-racing-green;
+    color: white;
+}
+.app-child-execution-label:nth-child(3) {
+    background-color: $zomp;
+    color: $dark-slate-gray;
+}
+.app-child-execution-label:nth-child(4) {
+    background-color: $lavender-blush;
+    color: $dark-slate-gray;
+}
+.app-child-execution-label:nth-child(5) {
+    background-color: $red-crayola;
+    color: white;
+}

@@ -1,0 +1,40 @@
+.app-selected-closure {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+.app-selected-closure-section {
+    width: 100%;
+    padding: 0.8rem 0.4rem;
+    display: flex;
+    flex-direction: column;
+}
+.app-selected-section-body {
+    flex: 1 1 0%;
+    position: relative;
+}
+.app-selected-closure-variable-list {
+    display: flex;
+    flex-direction: column;
+}
+.app-selected-closure-variable-list-header {
+    display: flex;
+    flex: none;
+    border: 1px solid #ededed;
+}
+.app-selected-closure-variable-list-column {
+    flex: 1 1 0%;
+    padding: 0.4rem;
+}
+.app-selected-closure-child-variable, .app-no-variables {
+    border: 1px solid #ededed;
+    border-top: 0;
+}
+.app-no-variables {
+    padding: 0.4rem;
+    width: 100%;
+}

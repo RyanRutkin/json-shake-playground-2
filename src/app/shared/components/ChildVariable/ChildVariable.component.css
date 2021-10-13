@@ -1,0 +1,8 @@
+.app-child-variable {
+    display: flex;
+    flex: none;
+}
+.app-child-variable-column {
+    flex: 1 1 0%;
+    padding: 0.4rem;
+}

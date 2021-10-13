@@ -17,7 +17,6 @@ export class CreatorNodeComponent {
     @Input() instance: any;
     @Input() type: ShakeNodeType;
 
-    debuggerStopped: boolean = false;
     dragging: boolean = false;
 
     onDragStart = (evt: any) => {
@@ -31,10 +30,6 @@ export class CreatorNodeComponent {
     onDrag = (evt: any) => {
         if (!this.dragging) {
             return;
-        }
-        if (!this.debuggerStopped) {
-            debugger;
-            this.debuggerStopped = true;
         }
         this.onSetPosition({
             x: evt.localX,

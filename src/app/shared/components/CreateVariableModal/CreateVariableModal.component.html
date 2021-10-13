@@ -1,7 +1,25 @@
 <div class="ion-page" >
-    <div class="app-create-variable-header" >Create Variable</div>
-    <ion-item class="app-create-variable-row" >
-        <ion-label>Name</ion-label>
-        <ion-input ></ion-input>
-    </ion-item>
+    <div class="app-create-variable-modal-body" >
+        <div class="app-create-variable-header" >Create Variable</div>
+        <ion-item class="app-create-variable-row" >
+            <ion-label>Label</ion-label>
+            <ion-input [value]="variableLabel" (keyup)="handleLabelValueChange($event)" ></ion-input>
+        </ion-item>
+        <ion-item class="app-create-variable-row" >
+            <ion-label>Type</ion-label>
+            <ion-select [value]="variableType" (ionChange)="handleVariableTypeChange($event)" >
+                <ng-container *ngFor="let typeOption of variableTypeOptions" >
+                    <ion-select-option value="{{typeOption}}" >{{typeOption}}</ion-select-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+        <ion-item class="app-create-variable-row" >
+            <ion-label>Initial Value</ion-label>
+            <ion-input [value]="variableInitialValue" (keyup)="handleInitialValueChange($event)" ></ion-input>
+        </ion-item>
+        <ion-row>
+            <ion-button color="primary" (click)="create()" >Save</ion-button>
+            <ion-button color="warning" (click)="dismiss()" >Cancel</ion-button>
+        </ion-row>
+    </div>
 </div>

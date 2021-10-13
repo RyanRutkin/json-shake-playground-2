@@ -1,13 +1,5 @@
 <div class="app-child-execution" >
-    <app-creator-node 
-        [header]="execution.label"
-        [position]="position"
-        [onAddNode]="onAddNode"
-        [onRemoveNode]="onRemoveNode"
-        [onSetPosition]="onSetPosition"
-        [instance]="execution"
-        [type]="'execution'"
-    >
-        <canvas #canvas ></canvas>
-    </app-creator-node>
+    <div class="app-child-execution-label" >
+        {{ execution.label }}
+    </div>
 </div>

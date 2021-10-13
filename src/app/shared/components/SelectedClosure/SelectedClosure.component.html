@@ -1,4 +1,4 @@
-<div class="app-selected-closure" >
+<ion-content class="app-selected-closure" >
     <div class="app-selected-closure-variables" >
         <div *ngFor="let variable of variables" class="app-selected-closure-variable" >
             <app-child-variable [variable]="variable" ></app-child-variable>
@@ -7,33 +7,47 @@
     <div class="app-selected-closure-section" >
         <div class="app-selected-section-header" >Variables</div>
         <div class="app-selected-section-body" >
-            <ng-container *ngFor="let variable of variables" >
-                <app-child-variable [variable]="variable" ></app-child-variable>
-            </ng-container>
+            <div class="app-selected-section-content" >
+                <div class="app-selected-closure-variable-list" >
+                    <div class="app-selected-closure-variable-list-header" >
+                        <div class="app-selected-closure-variable-list-column" >Label</div>
+                        <div class="app-selected-closure-variable-list-column" >Type</div>
+                        <div class="app-selected-closure-variable-list-column" >Value</div>
+                    </div>
+                    <div class="app-no-variables" *ngIf="variables.length === 0" >There are no variables declared in this closure.</div>
+                    <ng-container *ngFor="let variable of variables" >
+                        <app-child-variable class="app-selected-closure-child-variable" [variable]="variable" ></app-child-variable>
+                    </ng-container>
+                </div>
+            </div>
         </div>
         <div class="app-selected-section-footer" >
             <ion-button (click)="createVariable()" >Create variable</ion-button>
         </div>
     </div>
     <div class="app-selected-closure-section" >
-        <div class="app-selected-section-header" >Execution block</div>
-        <div class="app-selected-closure-execution app-selected-closure-onstart" >
-            <div class="app-selected-closure-execution-header" >onStart</div>
-            <div class="app-selected-closure-execution-body" >
-                <app-child-execution *ngIf="closure.onStart" [execution]="closure.onStart" [lockPosition]="true" ></app-child-execution>
-                <div class="app-selected-closure-execution-create" *ngIf="!closure.onStart" >
-                    <ion-button (click)="createExecution('start')" >Create</ion-button>
+        <div class="app-selected-section-header" >Lifecycle</div>
+        <div class="app-selected-section-body" >
+            <div class="app-selected-section-content" >
+                <div class="app-selected-closure-execution app-selected-closure-onstart" >
+                    <div class="app-selected-closure-execution-header" >onStart</div>
+                    <div class="app-selected-closure-execution-body" >
+                        <app-child-execution *ngIf="closure.onStart" [execution]="closure.onStart" [lockPosition]="true" (click)="selectExecution(closure.onStart)" ></app-child-execution>
+                        <div class="app-selected-closure-execution-create" *ngIf="!closure.onStart" >
+                            <ion-button (click)="createExecution('start')" >Create</ion-button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="app-selected-closure-execution app-selected-closure-ondestroy" >
-            <div class="app-selected-closure-execution-header" >onDestroy</div>
-            <div class="app-selected-closure-execution-body" >
-                <app-child-execution *ngIf="closure.onDestroy" [execution]="closure.onDestroy" [lockPosition]="true" ></app-child-execution>
-                <div class="app-selected-closure-execution-create" *ngIf="!closure.onDestroy" >
-                    <ion-button (click)="createExecution('destroy')" >Create</ion-button>
+                <div class="app-selected-closure-execution app-selected-closure-ondestroy" >
+                    <div class="app-selected-closure-execution-header" >onDestroy</div>
+                    <div class="app-selected-closure-execution-body" >
+                        <app-child-execution *ngIf="closure.onDestroy" [execution]="closure.onDestroy" [lockPosition]="true" (click)="selectExecution(closure.onDestroy)" ></app-child-execution>
+                        <div class="app-selected-closure-execution-create" *ngIf="!closure.onDestroy" >
+                            <ion-button (click)="createExecution('destroy')" >Create</ion-button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</ion-content>

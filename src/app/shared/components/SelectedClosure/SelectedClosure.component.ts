@@ -27,8 +27,7 @@ export class SelectedClosureComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.variables = Object.values(this.closure.getVariables());
-        this.closures = this.closure.getClosures();
+        this._reloadDisplay();
     }
 
     createExecution(type: 'start' | 'end') {
@@ -47,6 +46,15 @@ export class SelectedClosureComponent implements OnInit {
         }
     }
 
+    selectExecution(execution: ShakeExecutionInstance) {
+        this._logicService.setSelectedNode(execution, 'execution');
+    }
+
+    private _reloadDisplay() {
+        this.variables = Object.values(this.closure.getVariables());
+        this.closures = this.closure.getClosures();
+    }
+
     async createVariable() {
         const modal = await this._modalController.create({
             component: CreateVariableModalComponent,
@@ -55,6 +63,10 @@ export class SelectedClosureComponent implements OnInit {
                 closure: this.closure
             }
         });
-        return await modal.present();
+        await modal.present();
+        modal.onDidDismiss().then(() => {
+            this._reloadDisplay();
+        });
+        return;
     }
 }
