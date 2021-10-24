@@ -32,7 +32,7 @@
                 <div class="app-selected-closure-execution app-selected-closure-onstart" >
                     <div class="app-selected-closure-execution-header" >onStart</div>
                     <div class="app-selected-closure-execution-body" >
-                        <app-child-execution *ngIf="closure.onStart" [execution]="closure.onStart" [lockPosition]="true" (click)="selectExecution(closure.onStart)" ></app-child-execution>
+                        <app-child-execution *ngIf="closure.onStart" [execution]="closure.onStart" (click)="selectExecution(closure.onStart)" ></app-child-execution>
                         <div class="app-selected-closure-execution-create" *ngIf="!closure.onStart" >
                             <ion-button (click)="createExecution('start')" >Create</ion-button>
                         </div>
@@ -41,7 +41,7 @@
                 <div class="app-selected-closure-execution app-selected-closure-ondestroy" >
                     <div class="app-selected-closure-execution-header" >onDestroy</div>
                     <div class="app-selected-closure-execution-body" >
-                        <app-child-execution *ngIf="closure.onDestroy" [execution]="closure.onDestroy" [lockPosition]="true" (click)="selectExecution(closure.onDestroy)" ></app-child-execution>
+                        <app-child-execution *ngIf="closure.onDestroy" [execution]="closure.onDestroy" (click)="selectExecution(closure.onDestroy)" ></app-child-execution>
                         <div class="app-selected-closure-execution-create" *ngIf="!closure.onDestroy" >
                             <ion-button (click)="createExecution('destroy')" >Create</ion-button>
                         </div>

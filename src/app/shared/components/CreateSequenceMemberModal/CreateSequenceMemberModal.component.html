@@ -1,0 +1,12 @@
+<div class="ion-page" >
+    <div class="app-create-execution-member-modal-body" >
+        <div class="app-create-execution-member-modal-option-section" >
+            <div *ngFor="let option of executionMemberOptions" class="app-create-execution-member-modal-option" >
+                {{ option.label }}
+            </div>
+        </div>
+        <div class="app-create-execution-member-modal-action-section" >
+            <ion-button color="warning" (click)="dismiss()" >Cancel</ion-button>
+        </div>
+    </div>
+</div>

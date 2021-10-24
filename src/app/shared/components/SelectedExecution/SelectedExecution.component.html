@@ -1,0 +1,23 @@
+<ion-content class="app-selected-execution" >
+    <div class="app-selected-execution-sequence" >
+        <div class="app-selected-execution-sequence-header" >
+            Sequence
+        </div>
+        <div class="app-selected-execution-sequence-body" >
+            <div class="app-selected-execution-sequence-member-section" >
+                <div *ngFor="let member of execution.sequence" class="app-selected-execution-sequence-member" >
+                    <div class="app-selected-execution-sequence-member-type" >{{ sequence.type }}</div>
+                    <div class="app-selected-execution-sequence-member-name" >{{ sequence.name }}</div>
+                    <div class="app-selected-execution-sequence-member-button" >
+                        <ion-button (click)="removeSequenceMember(member)" >-</ion-button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-selected-execution-actions-section" >
+                <div class="app-selected-execution-action" >
+                    <ion-button (click)="addExecutionMember()" >Add Execution Member</ion-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -4,5 +4,6 @@
     </div>
     <div class="App-selected-node-body" [ngSwitch]="selectedNodeType" >
         <app-selected-closure *ngSwitchCase="'closure'" [closure]="selectedNode" ></app-selected-closure>
+        <app-selected-execution *ngSwitchCase="'execution'" [execution]="selectedNode" ></app-selected-execution>
     </div>
 </div>

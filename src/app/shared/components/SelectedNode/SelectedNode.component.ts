@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, HostBinding, OnDestroy } from "@angular/core";
 import { Subscription } from 'rxjs';
 import { ShakeLogicService } from '../../services/ShakeLogic.service';
 import { ShakeNodeType } from '../../types/ShakeNodeType.type';
@@ -6,9 +6,16 @@ import { ShakeNodeType } from '../../types/ShakeNodeType.type';
 @Component({
     selector: 'app-selected-node',
     templateUrl: './SelectedNode.component.html',
-    styleUrls: ['./SelectedNode.component.css']
+    styleUrls: ['./SelectedNode.component.css'],
+    styles: [
+        `.app-selected-node-host {
+            height: 100%;
+        }`
+    ]
 })
 export class SelectedNodeComponent implements OnDestroy {
+    @HostBinding('class') classes = 'app-selected-node-host';
+
     constructor (private _logicService: ShakeLogicService) {
         this._sub = this._logicService.selectedNode$.subscribe(nodeDef => {
             if (!nodeDef) {

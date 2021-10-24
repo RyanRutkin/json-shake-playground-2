@@ -1,0 +1,11 @@
+.app-selected-node-host {
+    height: 100%;
+}
+.App-selected-node {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.App-selected-node-body {
+    flex: 1 1 0%;
+}

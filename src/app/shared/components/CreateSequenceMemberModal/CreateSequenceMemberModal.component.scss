@@ -1,0 +1,53 @@
+$bittersweet: #ff6f59ff;
+$dark-slate-gray: #254441ff;
+$old-mauve: #5d2a42ff;
+$british-racing-green: #034732ff;
+$zomp: #43aa8bff;
+$lavender-blush: #ffeaecff;
+$red-crayola: #ef3054ff;
+
+.app-create-execution-member-modal-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-create-execution-member-modal-option-section {
+    overflow: auto;
+    flex: 1 1 0%;
+    padding: 0.8rem 1rem;
+}
+
+.app-create-execution-member-modal-option {
+    padding: 0.8rem 0.4rem;
+    margin: 0 0 0.4rem 0;
+    border: 1px solid transparent;
+    border-radius: 100vh;
+}
+
+.app-create-execution-member-modal-action-section {
+    flex: none;
+    padding: 0.8rem 1rem;
+}
+
+.app-create-execution-member-modal-option:nth-child(1) {
+    background-color: $bittersweet;
+    color: white;
+}
+.app-create-execution-member-modal-option:nth-child(2) {
+    background-color: $british-racing-green;
+    color: white;
+}
+.app-create-execution-member-modal-option:nth-child(3) {
+    background-color: $zomp;
+    color: $dark-slate-gray;
+}
+.app-create-execution-member-modal-option:nth-child(4) {
+    background-color: $lavender-blush;
+    color: $dark-slate-gray;
+}
+.app-create-execution-member-modal-option:nth-child(5) {
+    background-color: $red-crayola;
+    color: white;
+}
